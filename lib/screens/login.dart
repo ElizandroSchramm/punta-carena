@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:punta_carena/blocs/login_bloc.dart';
 import 'package:punta_carena/widgets/input_field.dart';
 
 class Login extends StatefulWidget {
@@ -7,6 +8,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  final _loginBloc = LoginBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +33,16 @@ class _LoginState extends State<Login> {
                   InputField(
                       icon: Icons.person_outline,
                       hint: "Usuário",
-                      hide: false
+                      hide: false,
+                      stream: _loginBloc.outEmail,
+                      onChanged: _loginBloc.changeEmail,
                   ),
                   InputField(
                       icon: Icons.lock_outline,
                       hint: "Senha",
-                      hide: true
+                      hide: true,
+                      stream: _loginBloc.outPassword,
+                      onChanged: _loginBloc.changePassword,
                   ),
                   SizedBox(height: 32,),
                   SizedBox(
